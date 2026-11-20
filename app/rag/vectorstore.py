@@ -1,4 +1,3 @@
-// code for storing and retrieving documents from a vector store
 
 import time
 from pinecone import Pinecone, ServerlessSpec
@@ -75,7 +74,7 @@ def ensure_index():
                 name=settings.pinecone_index_name,
                 dimension=desired_dimension,
                 metric="cosine",
-                serverless=ServerlessSpec(cloud="aws", region="us-east-1"),
+                spec=ServerlessSpec(cloud="aws", region="us-east-1")
             )
             # Wait for the index to be ready
             while True:
@@ -110,3 +109,4 @@ def get_retriever(top_k: int | None = None):
 def add_documents_to_vectorstore(documents):
     vectorstore = get_vectorstore()
     vectorstore.add_documents(documents)
+
